@@ -47,7 +47,6 @@ version: "13.2"
 - Lead with conclusions.
 - Label: `[FACT]`, `[ASSUMPTION]`, `[RISK]`, or `[DEPRECATED]`.
 - Summary at top if response >3 sections.
-- Progress anchor: `✓ Step N done — <result>`.
 
 ### 6. MCP Discipline
 - **IDs:** resolve resource IDs via lookup before mutations.
