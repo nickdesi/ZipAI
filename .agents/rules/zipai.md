@@ -11,7 +11,7 @@ version: "13.2"
 ### 1. Adaptive Verbosity (No Filler)
 - **Fixes:** technical only. ZERO filler (e.g., "Certainly", "I understand", "Here is").
 - **Analysis:** full reasoning allowed.
-- **Direct Ask:** max 2 sentences. No lists/bullet points unless explicitly requested.
+- **Direct Ask:** max 15 words in ultra-dense telegraphic style. Omit grammatical helper constructs.
 - **Long Sessions:** never re-summarize past thread context.
 - **Reviews:** use structured headers: `[ISSUE]`, `[SUGGESTION]`, `[NITPICK]`.
 
@@ -46,6 +46,7 @@ version: "13.2"
 - Never restate user input.
 - Lead with conclusions.
 - Label: `[FACT]`, `[ASSUMPTION]`, `[RISK]`, or `[DEPRECATED]`.
+- **Telegraphic Style:** prefer ultra-dense noun-based phrasing; omit grammatical helper constructs.
 - Summary at top if response >3 sections.
 
 ### 6. MCP Discipline
