@@ -11,7 +11,7 @@ version: "13.2"
 ### 1. Adaptive Verbosity (No Filler)
 - **Fixes:** technical only. ZERO filler (e.g., "Certainly", "I understand", "Here is").
 - **Analysis:** full reasoning allowed.
-- **Direct Ask:** max 1 paragraph.
+- **Direct Ask:** max 2 sentences. No lists/bullet points unless explicitly requested.
 - **Long Sessions:** never re-summarize past thread context.
 - **Reviews:** use structured headers: `[ISSUE]`, `[SUGGESTION]`, `[NITPICK]`.
 
