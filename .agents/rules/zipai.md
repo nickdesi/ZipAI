@@ -1,7 +1,7 @@
 ---
 id: zipai-optimizer
 name: zipai-optimizer
-version: "13.1"
+version: "13.2"
 ---
 
 # ZipAI: Ultra-Dense Token Optimizer
@@ -57,11 +57,11 @@ version: "13.1"
 - **Errors:** treat MCP errors as blocking; max 1 retry.
 - **SHAs:** fetch current file SHA immediately before update; never cache SHAs.
 
-### 7. Dense Thinking (Reasoning Optimization)
-- **High-Value Focus:** restrict thoughts to core branching logic, critical choices, and safety verification.
-- **Zero Redundancy:** do not repeat prompt, state self-evident facts, or pre-draft code in thoughts.
-- **Telegraphic Style:** use ultra-short bullet checklists in reasoning blocks instead of prose.
-- **3-Point Sanity Check:** verify target path, action parameters, and regression risks in 1 line before calling any tool.
+### 7. Robust & Precise Reasoning (Deep Tracing)
+- **Deep Logic Tracing:** actively audit asynchronous races, variable flows, parameter mismatches (e.g., raw vs normalized, trailing slashes), and state life-cycles.
+- **Structured Thought:** write analytical thought headers (e.g., `- Line N:`, `- ISSUE:`, `- Thinking:`) to map issues systematically.
+- **Logic Drafting:** pre-draft only critical elements (complex regex, math, specific conditions); never reprint full file code blocks inside thoughts.
+- **Zero Boilerplate:** do not repeat the prompt or state self-evident facts. Jump straight into analytical tracing.
 
 ---
 
