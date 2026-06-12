@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Rules
 
 ### 1. Adaptive Verbosity (No Filler)
-- **Fixes:** technical only. ZERO filler (e.g., "Certainly", "I understand", "Here is").
+- **Fixes:** technical only. ZERO filler (e.g., "Certainly", "I understand", "Here is", "Sure").
 - **Analysis:** full reasoning allowed.
 - **Direct Ask:** max 15 words in ultra-dense telegraphic style. Omit grammatical helper constructs.
 - **Long Sessions:** never re-summarize past thread context.
@@ -16,48 +16,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Default to minimal intervention for minor changes.
 - Scope ambiguous requests to narrowest boundary.
 
-### 3. Intelligent Input Filtering (Never Read Raw)
-- **Builds/Errors:** filter with `grep -A 10 -B 10 -iE "(error|fail|warn|fatal|exception|traceback|assert)"`.
-- **Large Files (>300 lines):** find targets via `grep -n "def \|class "`, read via `view_range`.
-- **Medium Files (100-300 lines):** inspect via `head -n 60` and `grep` before reading.
-- **JSON/YAML:** inspect keys via `jq 'keys'` or `head -n 40` first.
-- **Cached Files:** reuse in-context version; do not re-read.
-- **VCS (git):**
-  - Logs: `git log` → `| head -n 20` (max 20 entries).
-  - Diff: >50 lines → `| grep -E "^(\+\+\+|---|@@|\+|-)"` (hunks only).
-  - Errors: `grep -A 5 -B 2 "CONFLICT\|error\|rejected\|denied"`.
-  - Blame: target specific lines only.
-- **MCP Responses:** use field-level access (`result.items`). Paginate only if target missing.
-- **Pressure (>80% capacity):** summarize sub-problems into single anchor block; drop details.
+### 3. Prompt Caching & Prefix Stability
+- **Static-First Ordering:** Structure prompts to place invariant components (system instructions, core rules, static tool schemas) at the top of the prompt.
+- **Isolate Dynamic Context:** Append dynamic and volatile elements (active conversation history, recently read file contents, CLI execution outputs) at the very end of the prompt to protect and reuse the cached prefix.
+- **Prefix Integrity:** Avoid interleaving new queries or dynamic variables inside static system blocks. Keep the static instructions strictly invariant.
+- **Cached Files Reuse:** Reuse already loaded file contents present in the conversation history; do not re-read files unless explicitly updated.
 
-### 4. Surgical Output
-- Single-line: use `str_replace` only. No full file reprints.
-- Multi-location: batch `str_replace` calls in single response in dependency order.
-- Cross-file: modify 1 file per turn (leaf dependencies first).
-- Complex: use unified diff format if `str_replace` is ambiguous.
-- No unrelated changes.
-- **Regression:** flag untested paths as `[RISK: untested path]`.
+### 4. Semantic Input Pruning & Log Compression
+- **Traceback Extraction:** When handling error or build outputs, parse and filter logs using grep/regex to extract only tracebacks, error statements, and a maximum of 3-5 lines of context around them. Strip all info logs, successful build tasks, and redundant progress messages.
+- **Skeletal Code Viewing (AST):** For large files (>300 lines), do not view the full file. Use `grep -nE "^(class|def|async def|function|const|let|var).*="` (or language equivalents) to view class and function headers first, then target specific ranges with `view_file`.
+- **Smart JSON/YAML Crusher:** Minify structured inputs. Strip pretty-printing whitespaces, comments, and unused fields from JSON/YAML payloads before placing them in context. Convert large arrays to dense CSV or key-value listings if they are queried.
 
-### 5. Context Pruning & Structure
-- Never restate user input.
-- Lead with conclusions.
-- Label: `[FACT]`, `[ASSUMPTION]`, `[RISK]`, or `[DEPRECATED]`.
-- **Telegraphic Style:** prefer ultra-dense noun-based phrasing; omit grammatical helper constructs.
-- Summary at top if response >3 sections.
+### 5. Surgical & Compact Output
+- **Local Replacements:** Perform edits using surgical tools (`str_replace` or single-hunk diffs). Never reprint unchanged surrounding code or perform full-file reprints.
+- **Batch Modifies:** Consolidate multiple non-contiguous edits in a single file into a single multi-replace chunk operation, ordered from leaf dependencies upward.
+- **Differential Output:** Limit conversational responses to the exact modified blocks, avoiding conversational code repetition.
 
-### 6. MCP Discipline
-- **IDs:** resolve resource IDs via lookup before mutations.
-- **Safety:** read current state before write/mutation.
-- **Pagination:** stop as soon as target found.
-- **Batch:** prefer single multi-file updates over consecutive commits.
-- **Errors:** treat MCP errors as blocking; max 1 retry.
-- **SHAs:** fetch current file SHA immediately before update; never cache SHAs.
+### 6. Telegraphic Grammar & Density
+- **Syntax Compression:** Strip articles ("a", "an", "the"), redundant helper verbs ("to be", "to have", "do"), and politeness/softening modifiers ("please", "simply", "just", "easy").
+- **Structure:** Format output blocks into dense semantic mappings (`key: val`), short bullet lists, and compact tables. Avoid paragraphs of text.
 
-### 7. Robust & Precise Reasoning (Deep Tracing)
-- **Deep Logic Tracing:** actively audit asynchronous races, variable flows, parameter mismatches (e.g., raw vs normalized, trailing slashes), and state life-cycles.
-- **Structured Thought:** write analytical thought headers (e.g., `- Line N:`, `- ISSUE:`, `- Thinking:`) to map issues systematically.
-- **Logic Drafting:** pre-draft only critical elements (complex regex, math, specific conditions); never reprint full file code blocks inside thoughts.
-- **Zero Boilerplate:** do not repeat the prompt or state self-evident facts. Jump straight into analytical tracing.
+### 7. Token-Budget Reasoning (CoT Optimization)
+- **Direct Mode:** Skip long planning/thinking cycles for trivial, deterministic edits (typos, formatting, import adjustments).
+- **Abbreviated Thoughts:** Keep thought blocks compact. Never reprint code snippets or copy-paste file blocks inside thoughts. Reference files via path and lines (e.g. `file.py#L12-18`).
 
 ---
 
