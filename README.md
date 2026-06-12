@@ -50,3 +50,8 @@ mkdir -p /path/to/your/project/.agents/rules/
 cp .agents/rules/zipai.md /path/to/your/project/.agents/rules/zipai.md
 ```
 The agent extension will automatically pick up and adhere to these instructions.
+
+### 4. In OpenCode, Hermes Agent, & Custom AI Assistants
+Since these rules are framework-agnostic markdown files, they can be loaded by any custom prompt-based system:
+* **Hermes Agent:** Copy the rules directly into the agent's system instructions profile or append them to the configuration files (e.g., under the model prompt configurations in `config.yaml`).
+* **OpenCode / Custom Agent loops:** Import or reference `SKILL.md` directly into the system instructions template to force the model to prune input logs, inspect AST structures, and respond in ultra-dense telegraphic format.
