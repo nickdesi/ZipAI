@@ -1,42 +1,63 @@
-# ZipAI: Ultra-Dense Token Optimizer
+<div align="center">
+
+# ⚡ ZipAI
+
+**Ultra-dense token optimizer for LLM agents — maximize prompt caching, prune input, and compress output.**
 
 [![Version](https://img.shields.io/badge/version-15.0-blue.svg)](./SKILL.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Security Policy](https://img.shields.io/badge/Security-Policy-blue.svg)](SECURITY.md)
+[![GitHub stars](https://img.shields.io/github/stars/nickdesi/ZipAI?style=flat)](https://github.com/nickdesi/ZipAI/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/nickdesi/ZipAI)](https://github.com/nickdesi/ZipAI/commits/main)
+[![Issues](https://img.shields.io/github/issues/nickdesi/ZipAI)](https://github.com/nickdesi/ZipAI/issues)
+[![PRs](https://img.shields.io/github/issues-pr/nickdesi/ZipAI)](https://github.com/nickdesi/ZipAI/pulls)
+[![Platform: Any Agent](https://img.shields.io/badge/Platform-Any%20AI%20Agent-blue)](./SKILL.md)
 
-ZipAI is a set of optimization rules and prompt frameworks designed to minimize LLM input (prefill) and output (generation) token consumption. It maximizes **Prompt Caching** efficiency, enforces **Semantic Input Pruning** (inspired by LLMLingua-2), and guides LLM agents toward ultra-dense, telegraphic interactions.
+*Framework-agnostic markdown rules for Claude Code, Antigravity, Gemini CLI, Cline, Roo Code, Hermes & more.*
 
----
-
-## Key Features
-
-| # | Feature | Mechanism |
-|---|---|---|
-| 1 | **Zero Filler** | Strips conversational padding, enforces telegraphic grammar |
-| 2 | **Prompt Caching** | Static-first ordering preserves prefix cache hits (up to 90%) |
-| 3 | **Input Pruning** | Log compression, AST skeletal inspection, JSON/YAML minification |
-| 4 | **Surgical Output** | Localized diffs only, no full-file reprints |
-| 5 | **Reasoning Budget** | Adaptive CoT depth based on task complexity |
-| 6 | **Schema Enforcement** | JSON Schema replaces verbose format instructions |
-| 7 | **Semantic Compression** | Lossless context reduction targeting 50-90% savings |
-| 8 | **ARM-style Reasoning** | Task-aware reasoning mode selection |
-| 9 | **KV Cache Optimization** | Structured inter-tool communication, dynamic eviction |
-| 10 | **TAAC** | Domain-specific compression ratios (code vs math vs NL) |
+</div>
 
 ---
 
-## Token Savings Benchmark
+## ✨ Features
 
-| Category | Optimization | Before | After | Reduction |
-|---|---|---|---|---|
-| **Log Files** | Traceback extraction + context | ~4,500 tokens | ~225 tokens | **-95.0%** |
-| **MCP Payloads** | Minified JSON keys-only | ~1,800 tokens | ~180 tokens | **-90.0%** |
-| **Code Inspection** | AST Grep + targeted line view | ~6,200 tokens | ~480 tokens | **-92.2%** |
-| **Session Context** | Static-First caching | 30,000 tokens | ~3,000 equivalent | **-90.0%** (cache) |
-| **Agent Generation** | Telegraphic + surgical diffs | ~450 tokens | ~95 tokens | **-78.8%** |
+- 🧹 **Zero Filler** — strips conversational padding, enforces telegraphic grammar.
+- 💾 **Prompt Caching** — static-first ordering preserves prefix cache hits (up to 90%).
+- ✂️ **Input Pruning** — log compression, AST skeletal inspection, JSON/YAML minification.
+- 🔬 **Surgical Output** — localized diffs only, no full-file reprints.
+- 🧠 **Reasoning Budget** — adaptive Chain-of-Thought depth based on task complexity.
+- 📐 **Schema Enforcement** — JSON Schema replaces verbose format instructions.
+- 🗜️ **Semantic Compression** — lossless context reduction (50–90% savings).
+- 🧭 **ARM-style Reasoning** — task-aware reasoning mode selection.
+- ⚡ **KV Cache Optimization** — structured inter-tool communication, dynamic eviction.
+- 📊 **TAAC** — domain-specific compression ratios (code vs math vs NL).
 
----
+## 📊 Token Savings Benchmarks
 
-## Installation
+| Category | Before | After | Reduction |
+|---|---|---|---|
+| Log Files (traceback + context) | ~4,500 | ~225 | **-95%** |
+| MCP Payloads (minified JSON) | ~1,800 | ~180 | **-90%** |
+| Code Inspection (AST + lines) | ~6,200 | ~480 | **-92%** |
+| Session Context (static-first) | 30,000 | ~3,000 | **-90%** |
+| Agent Generation (telegraphic) | ~450 | ~95 | **-79%** |
+
+## 🚀 Quick Start (under 2 min)
+
+Install the rules into your AI agent. Pick the path for your tool:
+
+```bash
+# Antigravity IDE (Gemini Agent Skill)
+mkdir -p ~/.gemini/config/skills/zipai
+cp SKILL.md ~/.gemini/config/skills/zipai/SKILL.md
+
+# Claude Code CLI
+cp CLAUDE.md /path/to/your/project/CLAUDE.md
+```
+
+Restart your agent — it now applies ZipAI rules automatically. ✅
+
+## 📦 Installation
 
 ### Antigravity IDE (Gemini Agent Skill)
 
@@ -45,7 +66,7 @@ mkdir -p ~/.gemini/config/skills/zipai
 cp SKILL.md ~/.gemini/config/skills/zipai/SKILL.md
 ```
 
-The IDE will list `zipai-optimizer` as an available skill and apply the rules automatically.
+The IDE lists `zipai-optimizer` as an available skill and applies the rules automatically.
 
 ### Claude Code CLI
 
@@ -70,13 +91,37 @@ cp SKILL.md /path/to/your/project/GEMINI.md
 
 ### Hermes Agent & Custom AI Assistants
 
-These rules are framework-agnostic markdown. Load `SKILL.md` into any system instructions template:
-- **Hermes Agent:** Append to the agent's system instructions profile or `config.yaml`.
-- **Custom loops:** Reference `SKILL.md` directly in system instructions.
+These rules are framework-agnostic markdown. Load `SKILL.md` into any system-instructions template:
 
----
+- **Hermes Agent:** append to the agent's system instructions profile or `config.yaml`.
+- **Custom loops:** reference `SKILL.md` directly in system instructions.
 
-## File Structure
+## 🛠️ Usage
+
+ZipAI is a *ruleset*, not a runtime — once installed, your agent self-applies the optimizations. Verify behavior by prompting normally and observing denser, cache-friendly output:
+
+```bash
+# In your agent session
+"Summarize this 50-line log and propose a fix."   # expect ~225 tokens, not ~4,500
+```
+
+> **Tip:** `CLAUDE.md` and `.agents/rules/zipai.md` are mirrors of `SKILL.md`. Update `SKILL.md` first, then propagate.
+
+## 🏗️ Architecture
+
+ZipAI compresses tokens at every stage of the agent loop:
+
+```mermaid
+flowchart LR
+  A[Raw Prompt / Output] --> B[Zero Filler]
+  B --> C[Prompt Caching]
+  C --> D[Input Pruning]
+  D --> E[Semantic Compression]
+  E --> F[Ultra-Dense Tokens]
+  F --> G[LLM Context + Cache]
+```
+
+## 📁 File Structure
 
 ```
 ZipAI/
@@ -86,37 +131,32 @@ ZipAI/
 ├── README.md                   # This file
 ├── LICENSE                     # MIT License
 ├── .pre-commit-config.yaml    # Git hooks
-├── .gitattributes             # Git merge strategies
+├── .gitattributes              # Git merge strategies
 └── .github/
-    ├── scripts/
-    │   └── ai-pr-reviewer.cjs # AI PR review script (Gemini-powered)
+    ├── scripts/ai-pr-reviewer.cjs
     └── workflows/
-        ├── ai-pr-reviewer.yml           # Auto-review workflow
-        └── auto-resolve-pr-conflicts.yml # Auto-rebase open PRs
+        ├── ai-pr-reviewer.yml
+        └── auto-resolve-pr-conflicts.yml
 ```
 
-> **Note:** `CLAUDE.md` and `.agents/rules/zipai.md` are mirrors of `SKILL.md`. When updating the rules, update `SKILL.md` first, then propagate.
+## ⚠️ Limitations
 
----
+- **Brainstorming:** disable during creative / open-ended design phases.
+- **Grep Blindness:** key context may fall outside filter boundaries.
+- **Overshadowing:** aggressive pruning may drop micro-variables in long sessions.
+- **Math Fragility:** numerical reasoning chains resist aggressive compression.
 
-## Versioning
+## 🔒 Security
 
-| Version | Changes |
-|---|---|
-| **15.0** | Added sections 8-12: Schema Enforcement, Semantic Input Compression, ARM-style Reasoning, KV Cache Optimization, TAAC. Expanded Limitations. |
-| **14.0** | Initial public release. Rules 1-7: Zero Filler, Ambiguity, Prompt Caching, Input Pruning, Surgical Output, Grammar Density, Reasoning Budget. |
+ZipAI ships **markdown rules only — no executable code**. See [SECURITY.md](SECURITY.md) for the vulnerability-reporting policy.
 
----
-
-## Limitations
-
-- **Brainstorming:** Disable during creative/open-ended design phases.
-- **Grep Blindness:** Key context may fall outside filter boundaries.
-- **Overshadowing:** Aggressive pruning may drop micro-variables in long sessions.
-- **Math Fragility:** Numerical reasoning chains resist aggressive compression.
-
----
-
-## License
+## 📜 License
 
 [MIT](./LICENSE)
+
+---
+
+## GitHub Recommendations
+
+- **Suggested description:** `Ultra-dense token optimizer for LLM agents — prompt caching, log pruning, AST inspection, and minified JSON payloads.`
+- **Suggested topics:** `token-optimization`, `prompt-engineering`, `llm`, `ai-agents`, `claude-code`, `context-engineering`, `prompt-caching`, `antigravity`, `skills`, `markdown`
