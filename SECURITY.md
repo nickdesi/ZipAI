@@ -3,7 +3,7 @@
 ## Supported Versions
 
 | Version | Supported |
-|---------|-----------|
+| --------- | ----------- |
 | Latest release (`SKILL.md` v15.0) | ✅ |
 | `main` branch | ✅ |
 | Older releases | ❌ |

@@ -35,7 +35,7 @@
 ## 📊 Token Savings Benchmarks
 
 | Category | Before | After | Reduction |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Log Files (traceback + context) | ~4,500 | ~225 | **-95%** |
 | MCP Payloads (minified JSON) | ~1,800 | ~180 | **-90%** |
 | Code Inspection (AST + lines) | ~6,200 | ~480 | **-92%** |
@@ -123,7 +123,7 @@ flowchart LR
 
 ## 📁 File Structure
 
-```
+```text
 ZipAI/
 ├── SKILL.md                    # Canonical rules (v15.0) — single source of truth
 ├── CLAUDE.md                   # Mirror for Claude Code auto-detection
