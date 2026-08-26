@@ -19,6 +19,12 @@
 
 ---
 
+<p align="center">
+  ⭐ <b>If you find ZipAI helpful for reducing LLM API token costs, please consider giving it a star on GitHub!</b> ⭐
+</p>
+
+---
+
 ## ✨ Features
 
 - 🧹 **Zero Filler** — strips conversational padding, enforces telegraphic grammar.
@@ -146,17 +152,24 @@ ZipAI/
 - **Overshadowing:** aggressive pruning may drop micro-variables in long sessions.
 - **Math Fragility:** numerical reasoning chains resist aggressive compression.
 
+## 🌟 Stargazers & Community
+
+If ZipAI helped optimize your agent workflows or slashed your API bill, leave a star ⭐ to help other developers discover it!
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nickdesi/ZipAI&type=Date)](https://star-history.com/#nickdesi/ZipAI&Date)
+
+</div>
+
+---
+
 ## 🔒 Security
 
 ZipAI ships **markdown rules only — no executable code**. See [SECURITY.md](SECURITY.md) for the vulnerability-reporting policy.
 
-## 📜 License
-
-[MIT](./LICENSE)
-
 ---
 
-## GitHub Recommendations
+## 📜 License
 
-- **Suggested description:** `Ultra-dense token optimizer for LLM agents — prompt caching, log pruning, AST inspection, and minified JSON payloads.`
-- **Suggested topics:** `token-optimization`, `prompt-engineering`, `llm`, `ai-agents`, `claude-code`, `context-engineering`, `prompt-caching`, `antigravity`, `skills`, `markdown`
+This project is licensed under the [MIT License](./LICENSE).
